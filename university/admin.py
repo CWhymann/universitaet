@@ -1,39 +1,18 @@
 from django.contrib import admin
-from .models import (
-    Department,
-    Professor,
-    Student,
-    Course,
-    TeachingAssignment,
-    Enrollment,
-    Exam,
-)
+from .models import Student, StudentCard, Professor, Semester, CourseDescription, Course
 
 
-class TeachingAssignmentInline(admin.TabularInline):
-    model = TeachingAssignment
+class StudentCardInline(admin.TabularInline):
+    model = StudentCard
 
 
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ("code", "title", "department", "semester", "credits")
-    inlines = [TeachingAssignmentInline]
+    list_display = ("title", "professor", "semester")
 
 
-class EnrollmentInline(admin.TabularInline):
-    model = Enrollment
-    extra = 0
-
-
-class CourseAdminWithEnrollments(admin.ModelAdmin):
-    list_display = ("code", "title", "department", "semester", "credits")
-    inlines = [TeachingAssignmentInline, EnrollmentInline]
-
-
-admin.site.register(Department)
+admin.site.register(Student, inlines=[StudentCardInline])
+admin.site.register(StudentCard)
 admin.site.register(Professor)
-admin.site.register(Student)
-admin.site.register(Course, CourseAdminWithEnrollments)
-admin.site.register(Enrollment)
-admin.site.register(Exam)   
-
-# Register your models here.
+admin.site.register(Semester)
+admin.site.register(CourseDescription)
+admin.site.register(Course, CourseAdmin)   
