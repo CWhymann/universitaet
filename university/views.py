@@ -1,25 +1,11 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import Department, Course, Enrollment, Student, Professor
+from django.shortcuts import render
+from .models import Student, Professor, Course, Semester
 
 
-def dashboard(request):
-    departments = Department.objects.all()
-    courses = Course.objects.select_related("department").prefetch_related("professors")
-    return render(request, "university/dashboard.html", {
-        "departments": departments,
-        "courses": courses,
-    })
-
-
-def course_detail(request, pk):
-    course = get_object_or_404(
-        Course.objects.select_related("department"), pk=pk
-    )
-    enrollments = course.enrollments.select_related("student__user")
-    return render(request, "university/course_detail.html", {
-        "course": course,
-        "enrollments": enrollments,
+def index(request):
+    return render(request, "university/index.html", {
+        "students": Student.objects.count(),
+        "professors": Professor.objects.count(),
+        "courses": Course.objects.count(),
+        "semesters": Semester.objects.count(),
     })   
-
-# Create your views here.
