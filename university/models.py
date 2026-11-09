@@ -35,19 +35,19 @@ class Semester(models.Model):
         return self.name
 
 
-class CourseDescription(models.Model):
-    text = models.TextField()
-
-    def __str__(self):
-        return self.text[:50] + "..."
-
-
 class Course(models.Model):
     title = models.CharField(max_length=200)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name="courses")
     students = models.ManyToManyField(Student, related_name="courses", blank=True)
-    description = models.OneToOneField(CourseDescription, on_delete=models.CASCADE, related_name="course")
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE, related_name="courses")
 
     def __str__(self):
-        return f"{self.title} ({self.semester})"   
+        return f"{self.title} ({self.semester})"
+
+
+class CourseDescription(models.Model):
+    course = models.OneToOneField(Course, on_delete=models.CASCADE, related_name="description")
+    text = models.TextField()
+
+    def __str__(self):
+        return self.text[:50] + "..."
