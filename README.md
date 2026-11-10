@@ -1,58 +1,58 @@
-# Universitaetssystem
+# University System
 
-Django-basiertes Verwaltungssystem zur Modellierung von Studenten, Professoren, Kursen, Semestern und Studentenausweisen.
+Django-based administration system for modeling students, professors, courses, semesters, and student ID cards.
 
-## Voraussetzungen
+## Prerequisites
 
-- Python 3.10 oder neuer
+- Python 3.10 or newer
 - Git
 
 ## Installation
 
-Repository klonen:
+Clone the repository:
 
 ```powershell
 git clone https://github.com/CWhymann/universitaet.git
 cd universitaet
 ```
 
-Virtuelle Umgebung anlegen und aktivieren:
+Create and activate a virtual environment:
 
 ```powershell
 python -m venv venv
 venv\Scripts\Activate.ps1
 ```
 
-Abhängigkeiten installieren:
+Install the dependencies:
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-Datenbank einrichten:
+Set up the database:
 
 ```powershell
 python manage.py migrate
 ```
 
-## Admin-Konto anlegen
+## Create an Admin Account
 
 ```powershell
 python manage.py createsuperuser
 ```
 
-## Server starten
+## Start the Development Server
 
 ```powershell
 python manage.py runserver
 ```
 
-Danach im Browser öffnen:
+Then open the following URLs in your browser:
 
-- Startseite: http://127.0.0.1:8000/
-- Admin-Oberfläche: http://127.0.0.1:8000/admin/ (Anmeldung mit dem Admin-Konto von oben)
+- Home page: http://127.0.0.1:8000/
+- Admin interface: http://127.0.0.1:8000/admin/ (log in using the admin account created above)
 
-## Projektstruktur
+## Project Structure
 
-- `config/` – Projekteinstellungen und Haupt-URLs
-- `university/` – App mit den Modellen `Student`, `StudentCard`, `Professor`, `Semester`, `Course` und `CourseDescription`
+- `config/` – Project settings and main URL configuration
+- `university/` – Django application containing the models `Student`, `StudentCard`, `Professor`, `Semester`, `Course`, and `CourseDescription`
